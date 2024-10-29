@@ -1,10 +1,10 @@
 const { body } = require('express-validator');
 
-// const  { checkEmailNotInUse } = require('../services/userService')
+const  { checkEmailNotInUse } = require('../userManagement/userService')
 
 const userValidationRules = () => {
   return [
-    body('email', 'Invalid email').trim().isEmail().normalizeEmail(),
+    body('email', 'Invalid email').trim().isEmail().normalizeEmail().custom(checkEmailNotInUse),
     body('password', 'Password must be at least 8 characters long').isLength({ min: 8 }).trim()
   ];
 };
